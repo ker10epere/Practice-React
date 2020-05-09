@@ -2,25 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { latitude: null, errorMessage: '', position: 'Loading...' }
-
-
-
-  }
-
+  state = { latitude: null, errorMessage: '', position: 'Loading...' }
+  // Calls when apps started => Similar to constructor
+  // Should contains only loading files
   componentDidMount() {
     window.navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.setState({ latitude: position.coords.latitude })
-      },
+      (position) => this.setState({ latitude: position.coords.latitude }),
       (err) => this.setState({ errorMessage: err.message })
     )
   }
+
+  // Calls when State is updated
   componentDidUpdate() {
     console.log('Update')
   }
+
   componentWillUnmount() {
     console.log('Unmount')
   }
