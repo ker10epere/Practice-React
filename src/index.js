@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SeasonDisplay from './SeasonDisplay';
+import Spinner from './Spinner';
 
 class App extends React.Component {
 
@@ -15,15 +16,21 @@ class App extends React.Component {
     )
   }
 
-
-  render() {
+  renderContent() {
     if (this.state.errorMessage) {
       return <div>Error: {this.state.errorMessage}</div>
     }
     if (this.state.lat) {
       return <SeasonDisplay lat={this.state.lat} />
     }
-    return <div>Loading...</div>
+    return <Spinner message="Please allow us to get your location" />
+  }
+
+  render() {
+    // className is just an example to give a border to whatever renderContent
+    return <div className="border red">
+      {this.renderContent()}
+    </div>
   }
 }
 
